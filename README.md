@@ -1,8 +1,5 @@
 ## ilnx-WimGoedertier
 
-Adding stuff in beginning
-Adding much more stuff here
-
 This is the Readme, this is just for eee testing
 Will test commit and merge
 push and pull
