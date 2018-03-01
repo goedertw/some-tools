@@ -10,3 +10,4 @@ need enough lines
 to test 
 merging properly
 adding 1 new line
+adding another line
