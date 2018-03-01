@@ -13,5 +13,6 @@ to test
 merging properly
 ttt adding 1 new line
 sss - adding 1 new line
+here we go
 adding another line
 -- and more ---
