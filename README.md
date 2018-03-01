@@ -6,6 +6,7 @@ This is the Readme, this is just for testing
 Will test commit and merge
 push and pull
 and so on
+-- inserting here too --
 need enough lines
 to test 
 merging properly
