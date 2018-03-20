@@ -4,11 +4,8 @@ set -e
 set -u
 cd $(dirname $0)
 exclude=0
+action="none"
 
-if [ $# -lt 1 ]; then
-    echo "Usage: $0 status|push|pull|diff"
-    exit 1
-fi
 while [ $# -gt 0 ]; do
     case $1 in
     status|push|pull|diff) action=$1; shift;;
@@ -16,6 +13,10 @@ while [ $# -gt 0 ]; do
     *) echo "bad argument '$1'"; exit 1;;
     esac
 done
+if [ $action == "none" ]; then
+    echo "Usage: $0 [-x] status|push|pull|diff"
+    exit 1
+fi
 
 #for i in $( find -maxdepth 1 -type d | grep -v '^\.$' | grep -v 'examen' ); do
 for i in $( find -maxdepth 1 -type d | grep -v '^\.$' ); do
