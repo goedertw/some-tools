@@ -19,22 +19,33 @@ if [ $action == "none" ]; then
 fi
 
 #for i in $( find -maxdepth 1 -type d | grep -v '^\.$' | grep -v 'examen' ); do
+prev_skipped=0
 for i in $( find -maxdepth 1 -type d | grep -v '^\.$' ); do
     if [ $exclude -eq 1 ]; then
-        if echo $i | grep ozt-dbperf >/dev/null; then
-            echo ====== skipping $i =====
+        if echo $i | grep -e ozt-dbperf -e ozt-tile >/dev/null; then
+            if [ $prev_skipped -eq 0 ]; then
+                echo -n "== skipping $i"
+                prev_skipped=1
+            else
+                #echo -n ", $i"
+                echo -n "."
+            fi
             continue
         fi
     fi
-    echo
+    if [ $prev_skipped -eq 1 ]; then
+        echo
+    fi
+    prev_skipped=0
+    #echo
     echo ========== $i =============
     cd $i
     set +e
-    if [ "$action" = "diff" ]; then
-        git $action | cat
-    else
-        git $action | grep -v -e "Your branch is up to date with 'origin/master'." -e "nothing to commit, working tree clean"
-    fi
+    case $action in
+    diff) git diff | cat ;;
+    status) git status | grep -v -e "Your branch is up to date with 'origin/master'." -e "nothing to commit, working tree clean" ;;
+    *) git $action ;;
+    esac
     set -e
     cd ..
 done
