@@ -54,9 +54,11 @@ die() {
 
 search_files() {
     #echo search_files $1 #debug
-    for i in $(grep --files-with-matches '^\\documentclass' $(find $1 -type f -name '*.tex') /dev/null); do
-        process_file $i
-    done
+    find $1 -type f -name '*.tex' -print0 | xargs -0 grep --files-with-matches '^\\documentclass' >${tmpname}.2
+    while read line; do
+        process_file "$line"
+    done < ${tmpname}.2
+    rm ${tmpname}.2
 }
 has_questions_and_answers() {
     # $1 is a filename (including the .tex-extension) to be checked
@@ -109,7 +111,7 @@ check_needrebuild() {
 process_file() {
     #echo process_file $1 #debug
     foldername=$(dirname "$1")
-    cd $foldername
+    cd "$foldername"
     filebase=$(basename "$1")
     filebase=${filebase%.tex}
 
@@ -226,13 +228,11 @@ for i in "$@"; do
 done
 
 # define the commands and their options here, for maintainability
-if [ "${compiler}" = 'xelatex' ]; then
-    compiler_cmd="xelatex -interaction=batchmode"
-elif pdflatex --help|grep '\-quiet'>/dev/null; then
-    compiler_cmd="pdflatex -interaction=batchmode -quiet"
+if ${compiler} -help|grep '\-quiet'>/dev/null; then
+    compiler_cmd="${compiler} -interaction=batchmode -quiet"
 else
     # some versions of pdflatex (eg. on Mac) don't recognize the '-quiet' option
-    compiler_cmd="pdflatex -interaction=batchmode"
+    compiler_cmd="${compiler} -interaction=batchmode"
 fi
 echo "=== type 'sh $0 --help' for more details"
 
