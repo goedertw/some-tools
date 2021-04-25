@@ -23,9 +23,10 @@ $ git config --global push.default simple
 Eén teamlid maakt een repository aan op Github.
 De andere leden maken lokaal een kopie (kloon) van die Github-repository.
 
-1. Ga naar de repository op Github, klik rechts op de groene knop "Clone or Download". zorg dat "SSH" geselecteerd is. Kopieer de URL (begint met `git@github.com:...`)
-2. Open Git Bash in een directory waar je de lokale repository wil bijhouden
-3. `git clone git@github.com:<GITHUB-USERNAAM>/<REPO-NAAM>.git`
+1. Ga naar de repository op Github, klik op de groene knop "Download Code". zorg dat "SSH" geselecteerd is, onder "Clone".
+2. Kopieer de URL (begint met `git@github.com:...`)
+3. Open "Git Bash" of "Git CMD" in een directory waar je de lokale repository wil bijhouden
+4. `git clone git@github.com:<GITHUB-USERNAAM>/<REPO-NAAM>.git`
 
 Je kan de naam van de lokale directory wijzigen in wat je zelf wil.
 
