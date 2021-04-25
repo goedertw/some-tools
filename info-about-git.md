@@ -1,8 +1,12 @@
 # Werken met Git in een team
 
-Als je met Git werkt in een team, bestaat de kans dat je conflicten introduceert wanneer verschillende teamleden hetzelfde bestand bewerken en een nieuwe versie opladen naar Github. Enkele tips om dit te vermijden en de belangrijkste commando's die je zal nodig hebben. De meesten werken wellicht met een grafische tool als SourceTree of Github Desktop, maar de command-line tool is eigenlijk heel goed en geeft ook telkens aan wat de volgende stap is en hoe je een stap kan ongedaan maken. De foutboodschappen (als je ze goed leest) geven ook meestal een goed idee van wat er is misgegaan en hoe je dit kan oplossen.
+Als je met Git werkt in een team, bestaat de kans dat je conflicten introduceert wanneer verschillende teamleden hetzelfde bestand bewerken en een nieuwe versie opladen naar Github. Enkele tips om dit te vermijden en de belangrijkste commando's die je zal nodig hebben.
+
+We gebruiken in de lessen steeds de Git command-line tool. Deze werkt heel goed en werkt ook overal (Windows, Linux, Mac) op dezelfde manier. De tool geeft ook telkens aan wat de volgende stap is en hoe je een stap kan ongedaan maken. De foutboodschappen (als je ze goed leest) geven ook meestal een goed idee van wat er is misgegaan en hoe je dit kan oplossen.
 
 Probeer Git zo snel mogelijk onder de knie te krijgen en te begrijpen, je zal dit toch voortdurend nodig hebben... Commit regelmatig (meerdere keren per werksessie). Geef een goede beschrijving (je teamleden en je toekomstige zelf zullen je dankbaar zijn).
+
+Je kan ook gebruik maken van een grafische tool zoals SourceTree of Github Desktop, maar het is beter dat je die pas gebruikt als je de command-line tool goed onder de knie hebt.
 
 Werken met branches is in principe niet nodig en wordt hier niet besproken.
 
