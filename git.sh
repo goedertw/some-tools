@@ -8,13 +8,20 @@ action="none"
 
 while [ $# -gt 0 ]; do
     case $1 in
-    status|push|pull|diff) action=$1; shift;;
+    pull|status|diff|add|commit|push) action=$1; shift;;
+    p) action=pull; shift;;
+    s) action=status; shift; break;;
+    d) action=diff; shift; break;;
+    a) action=add; shift; break;;
+    c) action=commit; shift; break;;
+    P) action=push; shift;;
     -x) exclude=1; shift;;
     *) echo "bad argument '$1'"; exit 1;;
     esac
 done
 if [ $action == "none" ]; then
-    echo "Usage: $0 [-x] status|push|pull|diff"
+    echo "Usage: $0 [-x] pull|status|diff|add|commit|push"
+    echo "       $0 [-x] p|s|d|a|c|P"
     exit 1
 fi
 
@@ -42,9 +49,9 @@ for i in $( find -maxdepth 1 -type d | grep -v '^\.$' ); do
     cd $i
     set +e
     case $action in
-    diff) git diff | cat ;;
-    status) git status | grep -v -e "Your branch is up to date with 'origin/master'." -e "nothing to commit, working tree clean" ;;
-    *) git $action ;;
+    diff) git diff "$@" | cat ;;
+    status) git status "$@" | grep -v -e "Your branch is up to date with 'origin/master'." -e "nothing to commit, working tree clean" ;;
+    *) git $action "$@";;
     esac
     set -e
     cd ..
