@@ -4,7 +4,7 @@ set -o errexit # exit immediately if a command exits with a non-zero status
 set -o nounset # do not allow to use an unset variable
 set -o pipefail # force exit code of a pipeline to non-zero, if one of commands fails with non-zero
 
-compiler="pdflatex"
+compiler="xelatex"
 biber_cmd="biber --quiet"
 
 # tmp_extensions: these files will be removed after a successful run
@@ -222,17 +222,17 @@ for i in "$@"; do
     -f|--force) force=1 ;;
     -c|--cleanup) cleanup=1 ;;
     -nc|--nocleanup) nocleanup=1 ;;
-    -x|--xelatex) compiler=xelatex ;;
+    -p|--pdflatex) compiler=pdflatex ;;
     -*) die "Unexpected argument '$i'";;
     esac
 done
 
 # define the commands and their options here, for maintainability
 if ${compiler} -help|grep '\-quiet'>/dev/null; then
-    compiler_cmd="${compiler} -interaction=batchmode -quiet"
+    compiler_cmd="${compiler} -interaction=batchmode -quiet -shell-escape"
 else
     # some versions of pdflatex (eg. on Mac) don't recognize the '-quiet' option
-    compiler_cmd="${compiler} -interaction=batchmode"
+    compiler_cmd="${compiler} -interaction=batchmode -shell-escape"
 fi
 echo "=== type 'sh $0 --help' for more details"
 
