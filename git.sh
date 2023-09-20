@@ -50,7 +50,7 @@ for i in $( find -maxdepth 1 -type d | grep -v '^\.$' ); do
     set +e
     case $action in
     diff) git diff "$@" | cat ;;
-    status) git status "$@" | grep -v -e "Your branch is up to date with 'origin/master'." -e "nothing to commit, working tree clean" ;;
+    status) git status "$@" | egrep -v -e "Your branch is up to date with 'origin/(main|master)'." -e "nothing to commit, working tree clean" ;;
     *) git $action "$@";;
     esac
     set -e
